@@ -1,5 +1,6 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
+# Install dependencies seperti sebelumnya
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     libglib2.0-0 \
@@ -13,7 +14,6 @@ WORKDIR /app
 
 COPY . .
 
-RUN pip install --no-cache-dir flask opencv-python-headless numpy pytesseract ultralytics
+RUN pip install --no-cache-dir -r requirements.txt
 
 CMD ["python", "main.py"]
-
