@@ -1,3 +1,4 @@
+import os
 import cv2
 import numpy as np
 from flask import Flask, request, jsonify
@@ -8,11 +9,18 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "*"}})
-pytesseract.pytesseract.tesserect_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' 
+# pytesseract.pytesseract.tesserect_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' 
 
-yolo_model = YOLO('E:\Skripsi\Coding Skripsi\yolov8_trained_80_10_10 (coba).pt')
+#sertifikat
+model_model= os.path.join(os.path.dirname(os.path.abspath(__file__)), 'yolov8_trained_80_10_10 (coba).pt')
 
-yolo_model_st = YOLO('E:\Skripsi\Coding Skripsi\yolov8_surat_tugas_80_10_10.pt')
+#surattugas
+model_model_st = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'yolov8_surat_tugas_80_10_10.pt')
+
+
+yolo_model = YOLO(model_model) #'E:\Skripsi\Coding Skripsi\yolov8_trained_80_10_10 (coba).pt'
+
+yolo_model_st = YOLO(model_model_st) #'E:\Skripsi\Coding Skripsi\yolov8_surat_tugas_80_10_10.pt'
 
 
 # Define label mapping
