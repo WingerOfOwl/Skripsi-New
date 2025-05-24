@@ -9,7 +9,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 
 CORS(app, resources={r"/*": {"origins": "*"}})
-# pytesseract.pytesseract.tesserect_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe' 
 
 #sertifikat
 model_model= os.path.join(os.path.dirname(os.path.abspath(__file__)), 'yolov8_trained_80_10_10 (coba).pt')
@@ -18,9 +17,9 @@ model_model= os.path.join(os.path.dirname(os.path.abspath(__file__)), 'yolov8_tr
 model_model_st = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'yolov8_surat_tugas_80_10_10.pt')
 
 
-yolo_model = YOLO(model_model) #'E:\Skripsi\Coding Skripsi\yolov8_trained_80_10_10 (coba).pt'
+yolo_model = YOLO(model_model) 
 
-yolo_model_st = YOLO(model_model_st) #'E:\Skripsi\Coding Skripsi\yolov8_surat_tugas_80_10_10.pt'
+yolo_model_st = YOLO(model_model_st) 
 
 
 # Define label mapping
@@ -180,5 +179,6 @@ def process_image_st():
     except Exception as e:
         print(f"Error processing the image: {e}")
         return jsonify({"error": str(e)}), 500
+    
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
